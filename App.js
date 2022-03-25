@@ -15,6 +15,8 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import Routes from './src/config/routes';
+import { ThemeProvider } from 'styled-components'
+import { lightTheme, darkTheme } from './src/config/theme/index'
 
 
 
@@ -26,9 +28,9 @@ const App = () => {
   };
 
   return (
-    <>
-    <Routes />
-    </>
+    <ThemeProvider theme={lightTheme} >
+      <Routes />
+    </ThemeProvider>
   );
 };
 
