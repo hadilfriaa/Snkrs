@@ -3,6 +3,7 @@ import { showMessage } from 'react-native-flash-message'
 import readCart from './readCart'
 
 const removeFromCart = async item => {
+  console.log('je suis item remove', item);
   const formerCart = await readCart()
   const filteredCart = formerCart.filter(fav => fav.id !== item.id)
   try {

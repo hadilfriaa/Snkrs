@@ -10,7 +10,7 @@ const addToCart = async item => {
   try {
     const jsonValue = JSON.stringify([
       ...arrayOfProducts,
-      { name: item.name, id: item.id }
+      { name: item.name, id: item.id, retailPrice: item.retailPrice}
     ])
     await AsyncStorage.setItem('Cart', jsonValue)
     showMessage({
