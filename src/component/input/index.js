@@ -1,24 +1,25 @@
 import React from "react";
-import {StyleSheet, TextInput } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
+import styled from 'styled-components'
 
-function Input (props){
+
+function Input(props) {
 
   return (
-      <TextInput
-        style={styles.input}
-        onChangeText={props.onChangeText}
-        placeholder={props.placeholder}
-      />
+    <InputStyled
+      onChangeText={props.onChangeText}
+      placeholder={props.placeholder}
+    />
   );
 };
 
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
+const InputStyled = styled.TextInput`
+    height: 40px ;
+    margin: 12px ;
+    borderWidth: 1px ;
+    borderRadius: 40px;
+    padding: 10px ;
+    background: #ffffff
+`
 
 export default Input;
