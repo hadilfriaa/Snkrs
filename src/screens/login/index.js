@@ -1,19 +1,24 @@
 import React from 'react'
-import { Text, View, Button} from 'react-native'
+import { Text, View, Button } from 'react-native'
 import LoginForm from '../../component/loginForm'
+import { Title } from 'react-native-paper';
+import styled from 'styled-components'
+
+
 
 const Login = ({ navigation }) => {
 
     return (
-        <View>
+        <ViewStyle>
+            <Title> POUR REJOINDRE NIKE  </Title>
+            <LoginForm navigation={navigation} />
+        </ViewStyle>
 
-            <Text> Je suis dans la page login</Text>
 
-            <LoginForm />
-        </View>
-
-        
     )
 }
+const ViewStyle = styled.View`
+    alignItems: center;
+`
 
 export default Login

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Text, View, Button, Image } from 'react-native'
 import axios from 'axios'
 import styled from 'styled-components'
+import { Title } from 'react-native-paper'
 
 
 const Details = ({ route }) => {
@@ -12,7 +13,7 @@ const Details = ({ route }) => {
 
 
     useEffect(() => {
-        
+
         axios({
             method: 'GET',
             url: `https://v1-sneakers.p.rapidapi.com/v1/sneakers/${id}`,
@@ -22,28 +23,42 @@ const Details = ({ route }) => {
             }
         })
             .then(response => {
-                console.log(response);
                 setProduct(response.data.results)
             })
             .catch(error => {
-                console.log("je suis erreur",error)
             })
     }, [])
 
-    console.log("product",product);
 
     return (
-        <View>
+        <ViewDetails>
 
-            <Text>{product[0]?.name}</Text>
-        </View>
+            <Title> {product[0]?.shoe} </Title>
+            <ImageStyle source={{
+                uri: `https:${product[0]?.media.smallImageUrl.split(':')[1]}`
+            }}/>
+            <TextWhite>{product[0]?.title}</TextWhite>
+            <TextWhite>{product[0]?.retailPrice}</TextWhite>
+            <TextWhite>{product[0]?.releaseDate}</TextWhite>
+            
+
+        </ViewDetails>
     )
 }
 
+const ViewDetails = styled.View`
+    marginTop: 20px
+    alignItems: center
+`
 const ImageStyle = styled.Image`
-    borderRadius: 5px
-    width: 300px;
-    height: 190px;
+    marginTop: 20px
+    width: 380px;
+    height: 200px;
+`
+const TextWhite = styled.Text`
+    paddingLeft: 30px
+    paddingTop: 10px
+    color: #8A8888
 `
 
 export default Details

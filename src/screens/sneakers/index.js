@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, FlatList, Image } from 'react-native'
+import { ActivityIndicator, Text, View, FlatList, Image } from 'react-native'
 import styled from 'styled-components'
 import axios from "axios";
 import Card from '../../component/card';
+import Loader from '../../component/loader';
+import Check from '../../Utils/check';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Sneakers = ({ navigation }) => {
     const [sneakers, setSneakers] = useState([])
-
-
+    
+    useFocusEffect(()=>{
+        Check({ navigation })
+    })
+    
+    
 
     useEffect(() => {
         axios({
@@ -21,31 +28,33 @@ const Sneakers = ({ navigation }) => {
         }).then(response => {
 
             setSneakers([...sneakers, ...response.data.results])
-            console.log("je suis la");
 
         })
             .catch(error => {
                 console.log(error)
             })
     }, [])
-
-
-    console.log("je suis la");
-
+    
 
     return (
         <View>
 
-            <FlatList
+            {sneakers.length == 0 ?
+                <Loader />
+                : <FlatList
 
-                data={sneakers}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) => (
-                    <Card item={item} navigation={navigation}/>
+                    data={sneakers}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => (
+                        <Card item={item} navigation={navigation} />
 
-                )}
+                    )}
 
-            />
+                />
+
+            }
+
+
 
 
         </View>
@@ -57,5 +66,6 @@ const Sneakers = ({ navigation }) => {
 const ViewStyle = styled.View`
     alignItems: center;
 `
+
 
 export default Sneakers
